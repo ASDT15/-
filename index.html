@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>DREAM TIME - متجر</title>
+  <style>
+    /* نفس الأنماط من الكود السابق */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      font-size: 16px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #000000, #f5f4f5);
+      color: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    input,
+    button {
+      outline: none;
+    }
+    :root {
+      --bg-dark: #000000d8;
+      --text-light: #ffffffd0;
+      --btn-bg: #ffeaf898;
+      --btn-hover: #ffffff;
+      --input-border: #000000;
+      --search-bg: #fffdfd;
+      --search-text: rgb(0, 0, 0);
+      --section-title-color: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: #8acdfa;
+      --footer-bg: linear-gradient(to right, var(--bg-dark), var(--btn-bg));
+    }
+    .cartoon-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png'), #000000;
+      opacity: 0.3;
+      z-index: -1;
+      pointer-events: none;
+    }
+    header {
+      background: linear-gradient(to right, var(--bg-dark), var(--btn-bg));
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .logo-container img {
+      width: 70px;
+      height: auto;
+    }
+    .logo-texts {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-texts h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: #afdbf8;
+    }
+    .logo-texts h2 {
+      font-size: 1rem;
+      margin: 0;
+      color: #ffffff;
+      opacity: 0.9;
+    }
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      position: relative;
+      min-width: 200px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 40px 10px 15px;
+      border: 2px solid var(--input-border);
+      background-color: var(--search-bg);
+      color: var(--search-text);
+      border-radius: 30px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .search-bar input:focus {
+      background-color: white;
+      border-color: #6d4ff0;
+      box-shadow: 0 0 0 3px rgba(109, 79, 240, 0.2);
+    }
+    .search-bar svg {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: var(--btn-bg);
+      width: 20px;
+      height: 20px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-shrink: 0;
+    }
+    #soundButton {
+      padding: 8px 12px;
+      background-color: #fdd7e6;
+      color: rgb(61, 54, 54);
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    #soundButton:hover {
+      background-color: #ffffff;
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+    .cart-icon:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    .cart-icon svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 10px;
+      min-width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-label {
+      font-size: 13px;
+      color: #ffffff;
+      font-weight: normal;
+      display: inline;
+    }
+    main {
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-description {
+      text-align: center;
+      color: #95bce9;
+      margin: 0 auto 25px;
+      font-size: 1rem;
+      max-width: 800px;
+    }
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .filter-type {
+      padding: 10px 15px;
+      border: 1px solid #95bce9;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #ffffff;
+    }
+    .filter-type:hover,
+    .filter-type.active {
+      background: var(--btn-bg);
+      color: #000000;
+      border-color: var(--btn-bg);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      opacity: 1;
+      transform: translateY(0);
+      cursor: pointer;
+    }
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: scale-down;
+      background-color: #f9f9f9;
+    }
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    /* --- التعديلات الجديدة --- */
+    .card-price-container {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .card-price-current {
+      font-weight: bold;
+      color: #000000;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .card-price-currency {
+      font-size: 0.75rem;
+      color: #666;
+      align-self: flex-end;
+      direction: ltr;
+    }
+
+    .card-price-old {
+      font-size: 0.85rem;
+      color: #ff0000;
+      text-decoration: line-through;
+      margin-right: 8px;
+      direction: ltr;
+    }
+
+    .card-promo {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .card-promo span {
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .free-shipping {
+      color: #4CAF50;
+    }
+
+    .grab-deal {
+      color: #e91e63;
+    }
+
+    /* --- نهاية التعديلات --- */
+
+    .size-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .size-btn {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .size-btn:hover {
+      background-color: #e0e0e0;
+    }
+    .size-btn.active {
+      background-color: rgb(7, 7, 7);
+      color: white;
+      border-color: var(--btn-bg);
+    }
+    .add-to-cart {
+      background: var(--btn-bg);
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: auto;
+    }
+    .add-to-cart:hover {
+      background: var(--btn-hover);
+      box-shadow: 0 4px 12px rgba(255, 120, 226, 0.4);
+    }
+    .cart-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .cart-modal-content {
+      background: #090909;
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    .cart-modal-content h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+    .cart-items-scroll {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 10px;
+      flex-shrink: 0;
+      background-color: #f9f9f9;
+    }
+    .cart-item-name {
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .quantity-input {
+      width: 40px;
+      text-align: center;
+      border: 1px solid #444;
+      background: #222;
+      color: #fff;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    .quantity-btn {
+      background: var(--btn-bg);
+      color: #000000;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .quantity-btn:hover {
+      background: var(--btn-hover);
+    }
+    .cart-total {
+      margin: 20px 0;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--btn-bg);
+      text-align: center;
+    }
+    .cart-close {
+      background: var(--btn-bg);
+      color: #000000;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+    .cart-close:hover {
+      background: var(--btn-hover);
+    }
+    .cart-close.red {
+      background: #ff4d4d;
+      color: white;
+    }
+    .cart-close.red:hover {
+      background: #ff1a1a;
+    }
+    .send-order-btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .send-order-btn:hover {
+      background: #45a049;
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .card-body {
+        padding: 15px;
+      }
+      .card-title {
+        font-size: 1.1rem;
+      }
+      .size-btn {
+        padding: 5px 10px;
+        font-size: 0.85rem;
+      }
+      .add-to-cart {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .image-container {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cartoon-bg"></div>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="LOGO.png" alt="شعار DREAM TIME" loading="eager">
+        <div class="logo-texts">
+          <h1>متجر</h1>
+          <h2>DREAM TIME</h2>
+        </div>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="البحث على منتجك ...🔎" onkeyup="debouncedFilterProducts()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="var(--btn-bg)" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+      </div>
+      <div class="header-actions">
+        <button id="soundButton">🔇 فتح الصوت</button>
+        <div class="cart-icon" onclick="toggleCart()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="white" d="M15 1H3v2h12V1zm0 18H3v-2h12v2zm6-7H3V5h18v2zM6 7h12v2H6V7z" />
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+          <span class="cart-label">عربة التسوق</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="section-description">استعرضِ أحدث إضافاتنا في عالم الموضة: قطع مختارة بعناية، جودة مضمونة، توصيل سريع</div>
+    <div class="filters">
+      <button class="filter-type active" onclick="filterProductsByType.call(this, '')">الكل</button>
+      <button class="filter-type" onclick="filterProductsByType.call(this, 'احذيه رجالي')">احذيه رجالي</button>
+      <button class="filter-type" onclick="filterProductsByType.call(this, 'احذيه نسائي')">احذيه نسائي</button>
+      <button class="filter-type" onclick="filterProductsByType.call(this, 'تي شورت')">تي شورت</button>
+    </div>
+    <div class="grid" id="productGrid">
+      <!-- سيتم ملؤه تلقائيًا -->
+    </div>
+  </main>
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-modal-content">
+      <h2>عربة التسوق الخاصة بك</h2>
+      <div id="cartItems" class="cart-items-scroll"></div>
+      <div class="cart-total" id="cartTotal">الإجمالي: 0 ريال يمني</div>
+      <button class="send-order-btn" onclick="sendOrderToWhatsApp()">إرسال الطلب عبر واتساب</button>
+      <button class="cart-close red" onclick="emptyCart()">تفريغ العربة</button>
+      <button class="cart-close" onclick="toggleCart()">إغلاق</button>
+    </div>
+  </div>
+  <audio id="backgroundAudio" src="audio\NA.mp3" muted preload="auto"></audio>
+  <audio id="addSound" src="audio\athfo.mp3" preload="auto"></audio>
+  <audio id="sendSound" src="audio\arsal.mp3" preload="auto"></audio>
+  <audio id="emptySound" src="audio\tvrug.mp3" preload="auto"></audio>
+  
+  <script>
+    // --- المنتجات اليدوية ---
+    let products = [
+      {
+        id: 1,
+        name: "🔥 حذاء DREAM TIME الرمادي الرياضي العصري",
+        price: 4500,
+        oldPrice: 5500,
+        description: "بوتي جميل المنظر للخرجات الجميلة والملابس الرائعة",
+        image: "product-images/images-1/1.JPG",
+        type: "احذيه رجالي",
+        available_sizes: ["40", "41", "42", "43"]
+      },
+      {
+        id: 2,
+        name: "🖤حذاء DREAM TIME الاسود الكلاسيكي العصري – أناقة بسيطة وراحة تدوم",
+        price: 4500,
+        oldPrice: 5500,
+        description: "اضغط للمزيد",
+        image: "product-images/images-2/1.JPG",
+        type: "احذيه رجالي",
+        available_sizes: ["40", "41", "42", "43"]
+      },
+      {
+        id: 3,
+        name: "🤍 حذاء DREAM TIME الأبيض الأنيق – لمسة نقاء تكمّل إطلالتك",
+        price: 5500,  
+        oldPrice: 6500,
+        description: "مثالي للجري والتمارين الرياضية",
+        image: "product-images/images-3/1.JPG",
+        type: "احذيه رجالي",
+        available_sizes: ["40", "41", "42", "43", "44"]
+      }
+    ];
+
+    // --- المتغيرات الثابتة ---
+    const STORAGE_KEY = "dreamtime_cart";
+    let soundEnabled = false;
+
+    // دالة عرض المنتجات
+    function renderProducts(productsToRender) {
+      const grid = document.getElementById('productGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      if (productsToRender.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#fff;font-size:1.2rem;">لا توجد منتجات مطابقة</p>';
+        return;
+      }
+      const fragment = document.createDocumentFragment();
+      productsToRender.forEach(product => {
+        const card = createProductCard(product);
+        fragment.appendChild(card);
+      });
+      grid.appendChild(fragment);
+    }
+
+    // دالة إنشاء بطاقة المنتج (المعدّلة)
+    function createProductCard(product) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const defaultSize = (product.available_sizes && product.available_sizes.length > 0) ?
+            product.available_sizes[0] : 'M';
+        card.dataset.selectedSize = defaultSize;
+
+        const shortDescription = product.description && product.description.length > 50
+            ? product.description.slice(0, 50) + "..."
+            : product.description || "وصف غير متوفر";
+
+        let sizeButtonsHtml = '';
+        if (product.available_sizes && product.available_sizes.length > 0) {
+            product.available_sizes.forEach(size => {
+                const isActive = size === defaultSize ? 'active' : '';
+                sizeButtonsHtml += `<button class="size-btn ${isActive}" onclick="selectSize(${product.id}, '${size}', this)">${size}</button>`;
+            });
+        } else {
+            ['S', 'M', 'L', 'XL'].forEach(size => {
+                const isActive = size === defaultSize ? 'active' : '';
+                sizeButtonsHtml += `<button class="size-btn ${isActive}" onclick="selectSize(${product.id}, '${size}', this)">${size}</button>`;
+            });
+        }
+
+        const oldPrice = product.oldPrice || (product.price + 1000);
+
+        card.innerHTML = `
+            <div class="image-container">
+                <img src="${product.image}" alt="${product.name}" loading="eager">
+            </div>
+            <div class="card-body">
+                <div class="card-title">${product.name}</div>
+                <div class="card-desc">${shortDescription}</div>
+                
+                <div class="card-price-container">
+                    <div class="card-price-current">
+                        <span class="card-price-currency">ريال يمني</span>
+                        <span>${Math.round(product.price)}</span>
+                    </div>
+                    <div class="card-price-old">ريال يمني ${Math.round(oldPrice)}</div>
+                    <div class="card-promo">
+                        <span class="grab-deal">اغتنم الفرصة 👌</span>
+                        <span class="free-shipping">توصيل مجاني 🚚</span>
+                    </div>
+                </div>
+
+                <div class="size-controls" data-product-id="${product.id}">
+                    ${sizeButtonsHtml}
+                </div>
+                <button class="add-to-cart" onclick="addToCart(${product.id}, this.closest('.card').dataset.selectedSize)">أضف إلى السلة</button>
+            </div>
+        `;
+
+        card.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                window.location.href = `product-${product.id}.html`;
+            }
+        };
+
+        return card;
+    }
+
+    // --- دوال السلة ---
+    function addToCart(productId, size) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      if (!size) {
+        alert("الرجاء اختيار مقاس.");
+        return;
+      }
+      document.getElementById("addSound").play().catch(e => console.log("Audio play failed:", e));
+      let cart = getCart();
+      const existingItem = cart.find(item => item.id === product.id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+        existingItem.size = size;
+      } else {
+        cart.push({
+          ...product,
+          quantity: 1,
+          size: size
+        });
+      }
+      saveCart(cart);
+      updateCartCount();
+    }
+
+    function changeQuantity(productId, delta) {
+      let cart = getCart();
+      const itemIndex = cart.findIndex(item => item.id === productId);
+      if (itemIndex !== -1) {
+        cart[itemIndex].quantity += delta;
+        if (cart[itemIndex].quantity <= 0) {
+          cart.splice(itemIndex, 1);
+        }
+        saveCart(cart);
+        updateCartCount();
+        updateCartUI();
+      }
+    }
+
+    function changeSize(productId, newSize) {
+      let cart = getCart();
+      const itemIndex = cart.findIndex(item => item.id === productId);
+      if (itemIndex !== -1) {
+        cart[itemIndex].size = newSize;
+        saveCart(cart);
+        updateCartUI();
+      }
+    }
+
+    function updateCartUI() {
+      const cartItemsContainer = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+      if (!cartItemsContainer || !cartTotal) return;
+      const cart = getCart();
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p style='text-align:center;color:#fff;'>عربتك فارغة</p>";
+        cartTotal.textContent = "الإجمالي: 0 ريال يمني";
+        return;
+      }
+      cart.forEach((item) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        itemDiv.setAttribute('data-id', item.id);
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" loading="eager">
+          <div style="flex-grow:1;">
+            <span class="cart-item-name">${item.name}</span>
+            <div class="size-controls">
+            </div>
+            <div class="quantity-controls">
+              <button class="quantity-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+              <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+              <button class="quantity-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+            </div>
+          </div>
+          <div style="text-align:left;"><span>ريال يمني ${Math.round(item.price * item.quantity)}</span></div>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+
+        const sizeControlsDiv = itemDiv.querySelector('.size-controls');
+        const productData = products.find(p => p.id === item.id);
+        if (productData && productData.available_sizes && productData.available_sizes.length > 0) {
+          productData.available_sizes.forEach(size => {
+            const sizeBtn = document.createElement('button');
+            sizeBtn.className = `size-btn ${item.size === size ? 'active' : ''}`;
+            sizeBtn.textContent = size;
+            sizeBtn.onclick = () => changeSize(item.id, size);
+            sizeControlsDiv.appendChild(sizeBtn);
+          });
+        } else {
+          ['S', 'M', 'L', 'XL'].forEach(size => {
+            const sizeBtn = document.createElement('button');
+            sizeBtn.className = `size-btn ${item.size === size ? 'active' : ''}`;
+            sizeBtn.textContent = size;
+            sizeBtn.onclick = () => changeSize(item.id, size);
+            sizeControlsDiv.appendChild(sizeBtn);
+          });
+        }
+        total += item.price * item.quantity;
+      });
+      cartTotal.textContent = "الإجمالي: " + Math.round(total) + " ريال يمني";
+    }
+
+    function emptyCart() {
+      localStorage.removeItem(STORAGE_KEY);
+      updateCartCount();
+      updateCartUI();
+      document.getElementById("emptySound").play().catch(e => console.log("Audio play failed:", e));
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+      updateCartUI();
+    }
+
+    function selectSize(productId, size, button) {
+      const buttons = document.querySelectorAll(`.size-controls[data-product-id="${productId}"] .size-btn`);
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      const card = button.closest('.card');
+      if (card) {
+        card.dataset.selectedSize = size;
+      }
+    }
+
+    function updateSoundButton() {
+      const button = document.getElementById('soundButton');
+      if (button) {
+        button.innerHTML = soundEnabled ? "🔊 تشغيل الصوت" : "🔇 اغلاق الصوت";
+      }
+    }
+
+    function toggleSound() {
+      const audio = document.getElementById('backgroundAudio');
+      if (!soundEnabled) {
+        audio.muted = false;
+        audio.play()
+          .then(() => {
+            soundEnabled = true;
+            updateSoundButton();
+            localStorage.setItem('soundEnabled', 'true');
+          })
+          .catch(err => {
+            console.error("Audio play error:", err);
+            audio.muted = true;
+            alert("حدث خطأ في تشغيل الصوت. يرجى التفاعل مع الصفحة.");
+          });
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.muted = true;
+        soundEnabled = false;
+        updateSoundButton();
+        localStorage.setItem('soundEnabled', 'false');
+      }
+    }
+
+    function sendOrderToWhatsApp() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        alert("عربتك فارغة! الرجاء إضافة منتجات.");
+        return;
+      }
+      const phoneNumber = "+966542819759";
+      let message = "طلب جديد من متجر DREAM TIME:%0A";
+      let total = 0;
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        message += `${index + 1}. ${item.name} - ${item.quantity} قطعة - ${Math.round(itemTotal)} ريال يمني (المقاس: ${item.size})%0A`;
+      });
+      message += `%0Aالإجمالي: ${Math.round(total)} ريال يمني`;
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+      emptyCart();
+    }
+
+    function getCart() {
+      const cartStr = localStorage.getItem(STORAGE_KEY);
+      return cartStr ? JSON.parse(cartStr) : [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const countEl = document.getElementById("cartCount");
+      if (countEl) {
+        const totalItems = getCart().reduce((sum, item) => sum + item.quantity, 0);
+        countEl.textContent = totalItems;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedSoundState = localStorage.getItem('soundEnabled');
+      soundEnabled = savedSoundState === 'true';
+      const audio = document.getElementById('backgroundAudio');
+      if (audio) {
+        audio.muted = !soundEnabled;
+        updateSoundButton();
+      }
+      const soundButton = document.getElementById('soundButton');
+      if (soundButton) soundButton.addEventListener('click', toggleSound);
+      renderProducts(products);
+      updateCartCount();
+    });
+  </script>
+</body>
+</html>
