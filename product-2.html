@@ -1158,16 +1158,16 @@
         alert("عربتك فارغة! الرجاء إضافة منتجات.");
         return;
       }
-      const phoneNumber = "+966542819759";
+      const phoneNumber ="+966542819759";
       let message = "طلب جديد من متجر DREAM TIME:%0A";
       let total = 0;
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
-        message += `${index + 1}. ${item.name} - ${item.quantity} قطعة - ${Math.round(itemTotal)} ريال يمني (المقاس: ${item.size})%0A`;
+        message += `${index + 1}.${item.name}- ${item.quantity}قطعة -${Math.round(itemTotal)} ريال يمني (المقاس: ${item.size})%0A`;
       });
-      message += `%0Aالإجمالي: ${Math.round(total)} ريال يمني`;
-      window.open(`https://wa.me/  ${phoneNumber}?text=${message}`, '_blank');
+      message += `%0Aالإجمالي:${Math.round(total)} ريال يمني`;
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
       emptyCart();
     }
 
