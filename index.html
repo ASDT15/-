@@ -9,13 +9,13 @@
   <meta name="description" content="تسوق أفضل الأحذية الرجالية العصرية من متجر DREAM TIME. تصميم مريح وأنيق، توصيل مجاني في جميع المحافظات. اكتشف تشكيلتنا المميزة من الأحذية الرياضية والكلاسيكية." />
   <meta name="keywords" content="أحذية رجالي, متجر إلكتروني, توصيل مجاني, أحذية رياضية, أحذية كلاسيكية, DREAM TIME, تسوق عبر الإنترنت" />
   <meta name="author" content="DREAM TIME Store" />
-  <link rel="canonical" href="https://asdt15.github.io/DR-TE/" />
+  <link rel="canonical" href="https://asdt15.github.io/DR-TE/  " />
 
   <!-- Open Graph Tags لتحسين مشاركة الرابط -->
   <meta property="og:title" content="متجر DREAM TIME | أحذية رجالي أنيقة وعصرية" />
   <meta property="og:description" content="تسوق أفضل الأحذية الرجالية العصرية من متجر DREAM TIME. تصميم مريح وأنيق، توصيل مجاني في جميع المحافظات." />
-  <meta property="og:image" content="https://asdt15.github.io/DR-TE/LOGO.png" />
-  <meta property="og:url" content="https://asdt15.github.io/DR-TE/" />
+  <meta property="og:image" content="https://asdt15.github.io/DR-TE/LOGO.png  " />
+  <meta property="og:url" content="https://asdt15.github.io/DR-TE/  " />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DREAM TIME" />
 
@@ -69,6 +69,10 @@
       --card-bg: #ffffff;
       --card-border: #8acdfa;
       --footer-bg: linear-gradient(to right, var(--bg-dark), var(--btn-bg));
+
+      /* متغيرات لتنسيق عنوان المقاس */
+      --size-title-color: #666; /* لون النص */
+      --size-title-font-size: 0.8rem; /* حجم الخط */
     }
     .cartoon-bg {
       position: fixed;
@@ -76,7 +80,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/cubes.png'), #000000;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png  '), #000000;
       opacity: 0.3;
       z-index: -1;
       pointer-events: none;
@@ -349,6 +353,7 @@
       margin-bottom: 15px;
       justify-content: center;
       flex-wrap: wrap;
+      align-items: center; /* محاذاة العناصر عمودياً */
     }
     .size-btn {
       padding: 6px 12px;
@@ -366,6 +371,14 @@
       background-color: rgb(7, 7, 7);
       color: white;
       border-color: var(--btn-bg);
+    }
+    /* تنسيق العلامة النصية */
+    .size-selector-label {
+      font-size: var(--size-title-font-size); /* استخدام المتغير */
+      color: var(--size-title-color);       /* استخدام المتغير */
+      margin-right: 5px; /* مسافة من الزر الأول */
+      white-space: nowrap; /* منع الانتقال للسطر التالي */
+      font-weight: normal; /* جعل النص غير غامق */
     }
     .add-to-cart {
       background: var(--btn-bg);
@@ -658,12 +671,12 @@
           <h2>DREAM TIME</h2>
         </div>
       </div>
-      <div class="search-bar">
+      <!--<div class="search-bar">
         <input type="text" id="searchInput" placeholder="البحث على منتجك ...🔎" onkeyup="debouncedFilterProducts()">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path fill="var(--btn-bg)" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
         </svg>
-      </div>
+      </div>-->
       <div class="header-actions">
         <button id="soundButton">🔇 فتح الصوت</button>
         <div class="cart-icon" onclick="toggleCart()">
@@ -679,12 +692,12 @@
   <main>
     <h1 style="display: none;">متجر DREAM TIME | الأحذية الرجالية العصرية</h1>
     <div class="section-description">استعرضِ أحدث إضافاتنا في عالم الموضة: قطع مختارة بعناية، جودة مضمونة، توصيل سريع</div>
-    <div class="filters">
+   <!-- <div class="filters">
       <button class="filter-type active" onclick="filterProductsByType.call(this, '')">الكل</button>
       <button class="filter-type" onclick="filterProductsByType.call(this, 'احذيه رجالي')">احذيه رجالي</button>
       <button class="filter-type" onclick="filterProductsByType.call(this, 'احذيه نسائي')">احذيه نسائي</button>
       <button class="filter-type" onclick="filterProductsByType.call(this, 'تي شورت')">تي شورت</button>
-    </div>
+    </div>-->
     <div class="grid" id="productGrid">
       <!-- سيتم ملؤه تلقائيًا -->
     </div>
@@ -730,17 +743,17 @@
     let products = [
       {
         id: 1,
-        name: "🔥 حذاء DREAM TIME الرمادي الرياضي العصري",
+        name: "🔥 حذاء الرمادي القوي العصري",
         price: 4500,
         oldPrice: 5500,
         description: "بوتي جميل المنظر للخرجات الجميلة والملابس الرائعة",
         image: "product-images/images-1/1.jpg",
         type: "احذيه رجالي",
-        available_sizes: ["40", "41", "42", "43"]
+        available_sizes: ["40", "41", "42", "43"] 
       },
       {
         id: 2,
-        name: "🖤حذاء DREAM TIME الاسود الكلاسيكي العصري – أناقة بسيطة وراحة تدوم",
+        name: "🖤حذاء الاسود الكلاسيكي العصري",
         price: 4500,
         oldPrice: 5500,
         description: "اضغط للمزيد",
@@ -750,7 +763,7 @@
       },
       {
         id: 3,
-        name: "🤍 حذاء DREAM TIME الأبيض الأنيق – لمسة نقاء تكمّل إطلالتك",
+        name: "🤍حذاء  الأبيض الأنيق  ",
         price: 5500,  
         oldPrice: 6500,
         description: "مثالي للجري والتمارين الرياضية",
@@ -794,7 +807,7 @@
             ? product.description.slice(0, 50) + "..."
             : product.description || "وصف غير متوفر";
 
-        let sizeButtonsHtml = '';
+        let sizeButtonsHtml = '<span class="size-selector-label"> اختر مقاسك </span>'; // استخدام span و class جديد
         if (product.available_sizes && product.available_sizes.length > 0) {
             product.available_sizes.forEach(size => {
                 const isActive = size === defaultSize ? 'active' : '';
@@ -929,6 +942,7 @@
         const sizeControlsDiv = itemDiv.querySelector('.size-controls');
         const productData = products.find(p => p.id === item.id);
         if (productData && productData.available_sizes && productData.available_sizes.length > 0) {
+          sizeControlsDiv.innerHTML = '<span class="size-selector-label"> اختر مقاسك </span>'; // إعادة إضافة span في السلة
           productData.available_sizes.forEach(size => {
             const sizeBtn = document.createElement('button');
             sizeBtn.className = `size-btn ${item.size === size ? 'active' : ''}`;
@@ -937,6 +951,7 @@
             sizeControlsDiv.appendChild(sizeBtn);
           });
         } else {
+          sizeControlsDiv.innerHTML = '<span class="size-selector-label"> اختر مقاسك </span>'; // إعادة إضافة span في السلة
           ['S', 'M', 'L', 'XL'].forEach(size => {
             const sizeBtn = document.createElement('button');
             sizeBtn.className = `size-btn ${item.size === size ? 'active' : ''}`;
@@ -1020,7 +1035,7 @@
         message += `${index + 1}. ${item.name} - ${item.quantity} قطعة - ${Math.round(itemTotal)} ريال يمني (المقاس: ${item.size})%0A`;
       });
       message += `%0Aالإجمالي: ${Math.round(total)} ريال يمني`;
-      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+      window.open(`https://wa.me/  ${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
       emptyCart();
     }
 
