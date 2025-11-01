@@ -1055,7 +1055,7 @@
         message += `${index + 1}. ${item.name} - ${item.quantity} قطعة - ${Math.round(itemTotal)} ريال يمني (المقاس: ${item.size})%0A`;
       });
       message += `%0Aالإجمالي: ${Math.round(total)} ريال يمني`;
-      window.open(`https://wa.me/  ${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
       emptyCart();
     }
 
